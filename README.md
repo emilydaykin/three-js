@@ -8,8 +8,8 @@ npm run dev
 
 ## Table of Contents  
 1. [Elements](#🧙-the-4-elements)  
-2. [Transformations](#transforming-objects)  
-3. [Animations](#animations)  
+2. [Transformations](#🪄-transforming-objects)  
+3. [Animations](#🌀-animations)  
 
   
 ## 🧙 The 4 Elements
@@ -79,7 +79,7 @@ npm run dev
   });
   ```
 
-## Transforming Objects
+## 🪄 Transforming Objects
 
 * There are 4: **position**, **scale**, **rotation**, and **quarternion**
 * These properties (of a Mesh) 👆 will be compiled into *matrices*. Indivudually they're vectors (2D or 3D) or Eulers
@@ -125,7 +125,7 @@ npm run dev
 * [Docs](https://threejs.org/docs/#api/en/math/Quaternion)
 * Makes rotations easier / more mathematical
 
-## Animations
+## 🌀 Animations
 * RequestAnimationFrame: a function to call the function provided on the ***NEXT*** frame, it isn't simply 'to do animations'
 * It's bascially an infinite loop 😅
   ```javascript
