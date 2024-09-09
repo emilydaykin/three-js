@@ -6,7 +6,13 @@ https://threejs.org/
 npm run dev
 ```
 
-## 🧙 4 elements
+## Table of Contents  
+1. [Elements](#🧙-the-4-elements)  
+2. [Transformations](#transforming-objects)  
+3. [Animations](#animations)  
+
+  
+## 🧙 The 4 Elements
 #### Scenes
 * like a container we put objects, models, particles, lights etc in
   ```javascript
@@ -52,7 +58,7 @@ npm run dev
 * `lookAt` to tell the camera where to look
   ```javascript
   // camera.lookAt(new THREE.Vector3(-2, 0, 0)); // provide a vector 3 (coordinates) to look at
-  camera.lookAt(mesh.position); // look at the centre of my object
+  camera.lookAt(mesh.position); // look at the centre of my object (got to do `.position`! not just mesh)
   ```
 
 #### Renderer
@@ -118,3 +124,49 @@ npm run dev
 #### Quaternion
 * [Docs](https://threejs.org/docs/#api/en/math/Quaternion)
 * Makes rotations easier / more mathematical
+
+## Animations
+* RequestAnimationFrame: a function to call the function provided on the ***NEXT*** frame, it isn't simply 'to do animations'
+* It's bascially an infinite loop 😅
+  ```javascript
+  const tick = () => {
+    window.requestAnimationFrame(tick)  // 60 ticks per second cus the computer's frame-per-second (FPS) is 60!
+  };
+
+  tick();
+  ```
+* Got to adapt to the **frame rate** (since some screens *don't* run at 60 FPS):
+  * Option 1: Using the time delta (in milliseconds)
+    ```javascript
+    let startTime = Date.now();
+
+    const tick = () => {
+      // Time
+      const currentTime = Date.now();
+      const delta = currentTime - startTime;
+      startTime = currentTime;
+
+      // Update objects
+      mesh.rotation.y += 0.002 * delta; 
+      // 👆 now, we've made this rotate at the same rate regardless of the Frame Rate on whichever browser it's showing up on!
+    ```
+  * Option 2: using Clock (in seconds - easier to work with)
+    ```javascript
+    let startTime = Date.now();
+
+    const tick = () => {
+      // Time
+      const currentTime = Date.now();
+      const delta = currentTime - startTime;
+      startTime = currentTime;
+
+      // Update objects
+      mesh.rotation.y += 0.002 * delta; 
+      // 👆 now, we've made this rotate at the same rate regardless of the Frame Rate on whichever browser it's showing up on!
+    ```
+* Can use a library to help with animations
+  * e.g. GSAP (`npm i --save gsap@3.5.1`)
+  * to have more control, create tweens, create timelines
+  ```javascript
+  gsap.to(mesh.position, { duration: 1, delay: 1, x: 2 });
+  ```
